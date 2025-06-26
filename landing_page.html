@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="CuidarBem - Plataforma que conecta famílias a cuidadores qualificados para apoio familiar e cuidado humanizado de idosos" />
+  <meta name="keywords" content="cuidador, idoso, família, cuidado humanizado, apoio familiar" />
+  <meta property="og:title" content="CuidarBem - Apoio Familiar e Cuidado Humanizado para Idosos" />
+  <meta property="og:description" content="Conectamos famílias a cuidadores que cuidam com amor, proporcionando segurança e tranquilidade no cuidado de idosos" />
+  <meta property="og:type" content="website" />
+  <title>CuidarBem - Apoio Familiar e Cuidado Humanizado para Idosos</title>
+  <style>
+    :root {
+      --primary-color: #e67e22;
+      --secondary-color: #f39c12;
+      --background-color: #fffaf5;
+      --text-color: #333;
+      --card-background: #ffffff;
+      --border-color: #ccc;
+      --hover-color: #cf711c;
+    }
+
+    /* Reset básico */
+    * {
+      box-sizing: border-box;
+      margin: 0; 
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--background-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      animation: fadeIn 1s ease-in;
+      padding-bottom: 50px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    header {
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      padding: 35px 20px;
+      text-align: center;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      animation: slideDown 0.8s ease forwards;
+    }
+
+    @keyframes slideDown {
+      from { transform: translateY(-100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    header h1 {
+      font-size: 36px;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    header p {
+      font-size: 18px;
+      font-weight: 500;
+    }
+
+    .navbar {
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      padding: 15px 20px;
+      border-radius: 0 0 8px 8px;
+      position: relative;
+    }
+
+    .navbar-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .navbar ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 30px;
+    }
+
+    .navbar li {
+      display: inline-block;
+    }
+
+    .navbar a {
+      text-decoration: none;
+      color: white;
+      font-weight: 600;
+      font-size: 16px;
+      padding: 10px 15px;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+    }
+
+    .navbar a:hover,
+    .navbar a:focus {
+      background-color: rgba(255, 255, 255, 0.2);
+      color: #ffe6cc;
+    }
+
+    .navbar a.active {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    /* Menu hambúrguer para dispositivos móveis */
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+      padding: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      .navbar ul {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        padding: 20px;
+        gap: 10px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      }
+
+      .navbar ul.show {
+        display: flex;
+      }
+
+      .navbar li {
+        width: 100%;
+        text-align: center;
+      }
+
+      .navbar a {
+        display: block;
+        width: 100%;
+        padding: 15px;
+      }
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    /* Hero Section */
+    section.hero {
+      text-align: center;
+      background: #fff3ea;
+      padding: 60px 20px 80px;
+      border-radius: 15px;
+      box-shadow: 0 6px 15px rgba(230,126,34,0.2);
+      margin-bottom: 50px;
+    }
+
+    section.hero h2 {
+      font-size: 32px;
+      color: var(--primary-color);
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    section.hero p {
+      font-size: 20px;
+      max-width: 700px;
+      margin: 0 auto 30px;
+      color: #555;
+      font-weight: 500;
+    }
+
+    section.hero img {
+      width: 100%;
+      max-width: 600px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+
+    section.hero img:hover {
+      transform: scale(1.03);
+    }
+
+    .btn {
+      display: inline-block;
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      padding: 15px 40px;
+      font-size: 18px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      box-shadow: 0 6px 12px rgba(230,126,34,0.6);
+      transition: all 0.3s ease;
+      margin: 0 10px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: linear-gradient(90deg, var(--hover-color), var(--primary-color));
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(230,126,34,0.8);
+    }
+
+    /* Seção Features */
+    section.features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      gap: 35px;
+      margin-bottom: 60px;
+    }
+
+    .feature {
+      background: #fff8f0;
+      padding: 30px 25px;
+      border-radius: 15px;
+      box-shadow: 0 6px 15px rgba(230,126,34,0.1);
+      flex: 1 1 280px;
+      max-width: 320px;
+      text-align: center;
+      transition: transform 0.3s ease;
+      cursor: default;
+    }
+
+    .feature:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 30px rgba(230,126,34,0.3);
+    }
+
+    .feature img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .feature h3 {
+      color: var(--primary-color);
+      font-size: 22px;
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+
+    .feature p {
+      font-size: 16px;
+      color: #444;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+    /* Familismo Section */
+    section.familismo {
+      background: #fff3ea;
+      padding: 60px 30px;
+      border-radius: 15px;
+      max-width: 900px;
+      margin: 0 auto 70px;
+      box-shadow: 0 6px 20px rgba(230,126,34,0.15);
+      text-align: center;
+    }
+
+    section.familismo h2 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: var(--primary-color);
+    }
+
+    section.familismo p {
+      font-size: 18px;
+      color: #555;
+      max-width: 750px;
+      margin: 0 auto;
+      font-weight: 500;
+      line-height: 1.6;
+    }
+
+    section.familismo img {
+      margin-top: 35px;
+      max-width: 100%;
+      border-radius: 15px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.07);
+      transition: transform 0.3s ease;
+      cursor: default;
+    }
+
+    section.familismo img:hover {
+      transform: scale(1.02);
+    }
+
+    /* Testimonials Section */
+    section.testimonials {
+      max-width: 800px;
+      margin: 0 auto 50px;
+      padding: 0 10px;
+    }
+
+    section.testimonials h2 {
+      text-align: center;
+      font-size: 28px;
+      color: var(--primary-color);
+      margin-bottom: 40px;
+      font-weight: 700;
+    }
+
+    .testimonial {
+      background: #fff8f0;
+      padding: 25px 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(230,126,34,0.12);
+      margin-bottom: 30px;
+      font-style: italic;
+      color: #555;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .testimonial:hover {
+      box-shadow: 0 10px 25px rgba(230,126,34,0.25);
+    }
+
+    .testimonial img {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    }
+
+    .testimonial div {
+      max-width: 600px;
+    }
+
+    .testimonial p {
+      margin-bottom: 8px;
+      font-style: italic;
+      font-weight: 500;
+    }
+
+    .testimonial span {
+      font-weight: 700;
+      color: var(--text-color);
+      font-style: normal;
+      font-size: 16px;
+    }
+
+    footer {
+      background: #2c2c2c;
+      color: #eee;
+      text-align: center;
+      padding: 25px 15px;
+      font-size: 15px;
+      border-radius: 12px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .founders {
+      margin-top: 6px;
+      font-size: 14px;
+      color: #aaa;
+    }
+
+    /* Responsividade */
+    @media(max-width: 900px){
+      section.features {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .feature {
+        max-width: 90%;
+      }
+
+      .testimonial {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .testimonial img {
+        margin-bottom: 15px;
+      }
+    }
+
+    @media(max-width: 600px) {
+      header h1 {
+        font-size: 30px;
+      }
+
+      header p {
+        font-size: 16px;
+      }
+
+      section.hero h2 {
+        font-size: 26px;
+      }
+
+      section.hero p {
+        font-size: 18px;
+      }
+
+      .btn {
+        padding: 12px 30px;
+        font-size: 16px;
+        margin: 10px 5px;
+        display: block;
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      section.familismo h2, section.testimonials h2 {
+        font-size: 24px;
+      }
+
+      section.familismo p {
+        font-size: 16px;
+      }
+
+      main {
+        padding: 0 15px;
+      }
+    }
+
+    /* Acessibilidade */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* Focus styles para acessibilidade */
+    a:focus, button:focus {
+      outline: 2px solid var(--primary-color);
+      outline-offset: 2px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>CuidarBem</h1>
+    <p>Apoio Familiar e Cuidado Humanizado para Idosos</p>
+  </header>
+
+  <nav class="navbar" role="navigation" aria-label="Menu principal">
+    <div class="navbar-container">
+      <button class="menu-toggle" aria-label="Abrir menu" onclick="toggleMenu()">
+        ☰
+      </button>
+      <ul id="navbar-menu">
+        <li><a href="landing_page.html" class="active" aria-current="page">Início</a></li>
+        <li><a href="sou_cuidador.html">Sou Cuidador</a></li>
+        <li><a href="formulario_familias.html">Sou uma Família</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <h2 id="hero-title">Conectando famílias a cuidadores que cuidam com amor</h2>
+      <p>Na CuidarBem, sabemos que cuidar de quem amamos vai além de um serviço: é um compromisso com carinho, confiança e profissionalismo.</p>
+      <div>
+        <a href="sou_cuidador.html" class="btn" role="button">Sou Cuidador</a>
+        <a href="formulario_familias.html" class="btn" role="button">Sou uma Família</a>
+      </div>
+    </section>
+
+    <section class="features" aria-label="Benefícios da plataforma CuidarBem">
+      <article class="feature">
+        <img src="imagem3.avif" alt="Profissional verificado" loading="lazy" />
+        <h3>Profissionais Verificados</h3>
+        <p>Selecionamos cuidadores com referências, formação e experiência para garantir segurança e qualidade no atendimento.</p>
+      </article>
+      
+      <article class="feature">
+        <img src="imagem4.jpg" alt="Família feliz reunida" loading="lazy" />
+        <h3>Atendimento Ágil</h3>
+        <p>Encontre cuidadores disponíveis para turnos, diárias ou plantões com rapidez e transparência, sem burocracia.</p>
+      </article>
+      
+      <article class="feature">
+        <img src="imagem5.jpg" alt="Apoio familiar entre gerações" loading="lazy" />
+        <h3>Apoio Familiar</h3>
+        <p>Conteúdos, suporte emocional e orientações para que a família esteja sempre fortalecida durante o cuidado.</p>
+      </article>
+    </section>
+
+    <section class="familismo" aria-labelledby="familismo-title">
+      <h2 id="familismo-title">Nosso compromisso com o familismo</h2>
+      <p>Inspirados pelos estudos da psicóloga Deusivania Falcão, valorizamos o papel insubstituível da família no cuidado ao idoso. A CuidarBem fortalece este laço oferecendo suporte, orientação e tranquilidade, para que família e profissional caminhem juntos.</p>
+      <img src="imagem6.jpg" alt="Avó e neta em momento carinhoso" loading="lazy" />
+    </section>
+
+    <section class="testimonials" aria-labelledby="testimonials-title">
+      <h2 id="testimonials-title">O que dizem as famílias</h2>
+      
+      <div class="testimonial">
+        <img src="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=90" 
+             alt="Francisco L. Galvão" loading="lazy" />
+        <div>
+          <p>"Percebo que, além do profissionalismo, as cuidadoras são muito atenciosas, pacientes e carinhosas com todos da família. Para nós, elas já fazem parte da família."</p>
+          <span>— Francisco L. Galvão</span>
+        </div>
+      </div>
+
+      <div class="testimonial">
+        <img src="imagem2.webp" alt="Juliana Barbosa" loading="lazy" />
+        <div>
+          <p>"A insistência em não repetir erros foi nítida — fomos tratados com muito carinho e atenção. Todas as empresas deveriam ser assim."</p>
+          <span>— Juliana Barbosa</span>
+        </div>
+      </div>
+
+      <div class="testimonial">
+        <img src="imagem1.jpeg" alt="Maria Aparecida Carneiro" loading="lazy" />
+        <div>
+          <p>"Desde a primeira ligação… Entrou em nossas vidas como anjos, prontamente nos atenderam, dispostos a nos ajudar com profissionalismo e coração."</p>
+          <span>— Maria Aparecida Carneiro</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Plataforma CuidarBem &copy; 2025</p>
+    <p class="founders">Criado com carinho por <strong>Mayara</strong> e <strong>Romulo</strong></p>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('navbar-menu');
+      const toggle = document.querySelector('.menu-toggle');
+      
+      menu.classList.toggle('show');
+      
+      // Atualiza o aria-label do botão
+      const isOpen = menu.classList.contains('show');
+      toggle.setAttribute('aria-label', isOpen ? 'Fechar menu' : 'Abrir menu');
+      toggle.innerHTML = isOpen ? '✕' : '☰';
+    }
+
+    // Fecha o menu ao clicar fora dele
+    document.addEventListener('click', function(event) {
+      const navbar = document.querySelector('.navbar');
+      const menu = document.getElementById('navbar-menu');
+      
+      if (!navbar.contains(event.target) && menu.classList.contains('show')) {
+        menu.classList.remove('show');
+        document.querySelector('.menu-toggle').innerHTML = '☰';
+        document.querySelector('.menu-toggle').setAttribute('aria-label', 'Abrir menu');
+      }
+    });
+
+    // Fecha o menu ao pressionar Escape
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        const menu = document.getElementById('navbar-menu');
+        if (menu.classList.contains('show')) {
+          menu.classList.remove('show');
+          document.querySelector('.menu-toggle').innerHTML = '☰';
+          document.querySelector('.menu-toggle').setAttribute('aria-label', 'Abrir menu');
+        }
+      }
+    });
+
+    // Lazy loading para imagens (fallback para navegadores mais antigos)
+    if ('IntersectionObserver' in window) {
+      const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            img.src = img.dataset.src || img.src;
+            img.classList.remove('lazy');
+            imageObserver.unobserve(img);
+          }
+        });
+      });
+
+      document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+        imageObserver.observe(img);
+      });
+    }
+
+    // Smooth scroll para links internos (se houver)
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
+

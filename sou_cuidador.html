@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Torne-se um cuidador na CuidarBem. Conecte-se com famílias que precisam de cuidado humanizado para idosos" />
+  <title>Seja um Cuidador - CuidarBem</title>
+  <style>
+    :root {
+      --primary-color: #e67e22;
+      --secondary-color: #f39c12;
+      --background-color: #fffaf5;
+      --text-color: #333;
+      --card-background: #ffffff;
+      --border-color: #ccc;
+      --hover-color: #cf711c;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--background-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+      font-size: 36px;
+      margin: 0;
+      font-weight: 700;
+    }
+
+    header p {
+      font-size: 18px;
+      margin-top: 10px;
+      font-weight: 500;
+    }
+
+    .navbar {
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      padding: 15px 20px;
+      border-radius: 0 0 8px 8px;
+      position: relative;
+    }
+
+    .navbar-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .navbar ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 30px;
+    }
+
+    .navbar li {
+      display: inline-block;
+    }
+
+    .navbar a {
+      text-decoration: none;
+      color: white;
+      font-weight: 600;
+      font-size: 16px;
+      padding: 10px 15px;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+    }
+
+    .navbar a:hover,
+    .navbar a:focus {
+      background-color: rgba(255, 255, 255, 0.2);
+      color: #ffe6cc;
+    }
+
+    .navbar a.active {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    /* Menu hambúrguer para dispositivos móveis */
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+      padding: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      .navbar ul {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        padding: 20px;
+        gap: 10px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      }
+
+      .navbar ul.show {
+        display: flex;
+      }
+
+      .navbar li {
+        width: 100%;
+        text-align: center;
+      }
+
+      .navbar a {
+        display: block;
+        width: 100%;
+        padding: 15px;
+      }
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    section {
+      margin-bottom: 50px;
+      background: var(--card-background);
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+
+    h2 {
+      color: var(--primary-color);
+      font-size: 28px;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    .section-icon {
+      font-size: 24px;
+      margin-right: 10px;
+      vertical-align: middle;
+    }
+
+    p {
+      font-size: 18px;
+      color: #555;
+      margin-bottom: 15px;
+    }
+
+    .btn {
+      display: inline-block;
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      padding: 15px 35px;
+      font-size: 18px;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 8px;
+      margin-top: 25px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(230, 126, 34, 0.3);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(230, 126, 34, 0.4);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    ul {
+      padding-left: 25px;
+      margin: 20px 0;
+    }
+
+    li {
+      margin-bottom: 12px;
+      font-size: 17px;
+      color: #555;
+    }
+
+    .highlight-box {
+      background: #fff3ea;
+      border-left: 4px solid var(--primary-color);
+      padding: 20px;
+      margin: 25px 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .highlight-box p {
+      margin: 0;
+      font-weight: 600;
+      color: var(--text-color);
+    }
+
+    .value-example {
+      background: #f8f9fa;
+      padding: 15px;
+      border-radius: 8px;
+      margin: 15px 0;
+      border: 1px solid #e9ecef;
+    }
+
+    .value-example strong {
+      color: var(--primary-color);
+    }
+
+    footer {
+      background: #2c2c2c;
+      color: #eee;
+      text-align: center;
+      padding: 30px 20px;
+      font-size: 16px;
+      border-radius: 12px;
+      margin-top: 40px;
+    }
+
+    .founders {
+      font-size: 14px;
+      color: #aaa;
+      margin-top: 10px;
+    }
+
+    /* Responsividade */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 28px;
+      }
+
+      header p {
+        font-size: 16px;
+      }
+
+      main {
+        padding: 0 15px;
+      }
+
+      section {
+        padding: 20px;
+        margin-bottom: 30px;
+      }
+
+      h2 {
+        font-size: 24px;
+      }
+
+      p, li {
+        font-size: 16px;
+      }
+
+      .btn {
+        padding: 12px 25px;
+        font-size: 16px;
+        width: 100%;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        padding: 30px 15px;
+      }
+
+      section {
+        padding: 15px;
+      }
+
+      .highlight-box {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Seja Cuidador na CuidarBem</h1>
+    <p>Transforme sua vocação em uma missão de vida. Cuidar com amor também é uma profissão.</p>
+  </header>
+
+  <nav class="navbar" role="navigation" aria-label="Menu principal">
+    <div class="navbar-container">
+      <button class="menu-toggle" aria-label="Abrir menu" onclick="toggleMenu()">
+        ☰
+      </button>
+      <ul id="navbar-menu">
+        <li><a href="landing_page.html">Início</a></li>
+        <li><a href="sou_cuidador.html" class="active" aria-current="page">Sou Cuidador</a></li>
+        <li><a href="formulario_familias.html">Sou uma Família</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <section aria-labelledby="sobre-plataforma">
+      <h2 id="sobre-plataforma">
+        <span class="section-icon" aria-hidden="true">🌱</span>
+        Sobre a Plataforma
+      </h2>
+      <p>A CuidarBem conecta cuidadores experientes a famílias que precisam de apoio. Aqui, mais do que diplomas, valorizamos a prática, o respeito e a dedicação com o idoso e sua família. Se você atua com o coração, seja técnica, cuidadora, enfermeira ou acompanhante, este espaço é seu.</p>
+    </section>
+
+    <section aria-labelledby="quem-pode-cadastrar">
+      <h2 id="quem-pode-cadastrar">
+        <span class="section-icon" aria-hidden="true">✅</span>
+        Quem pode se cadastrar?
+      </h2>
+      <ul>
+        <li>Cuidadores com ou sem formação técnica</li>
+        <li>Técnicos e enfermeiros que atuam como cuidadores</li>
+        <li>Pessoas com experiência comprovada em atendimento domiciliar</li>
+      </ul>
+      <div class="highlight-box">
+        <p><strong>Importante:</strong> Mesmo que tenha formação como técnica ou enfermeira, ao se cadastrar como cuidadora, você atua como tal e receberá como cuidadora — salvo acordo prévio com a família.</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="processo-selecao">
+      <h2 id="processo-selecao">
+        <span class="section-icon" aria-hidden="true">📋</span>
+        Como é feita a seleção?
+      </h2>
+      <p>Ao se cadastrar, você responderá a um questionário prático sobre situações reais do dia a dia, como:</p>
+      <ul>
+        <li>Passo a passo do banho no leito em domicílio</li>
+        <li>Cuidados com a pele do idoso e sinais de alerta</li>
+        <li>Organização da medicação do paciente</li>
+        <li>Como lida com oxigenoterapia e pacientes acamados</li>
+      </ul>
+      <p>Suas respostas são avaliadas por profissionais com experiência prática para garantir que somente cuidadoras capacitadas integrem a plataforma.</p>
+    </section>
+
+    <section aria-labelledby="valores-contratos">
+      <h2 id="valores-contratos">
+        <span class="section-icon" aria-hidden="true">💰</span>
+        Valores e Contratos
+      </h2>
+      <p>As famílias contratam diretamente você pela plataforma. Os valores são baseados em:</p>
+      <ul>
+        <li>Turno (8h, 12h, 24h)</li>
+        <li>Quantidade de dias</li>
+        <li>Complexidade do paciente</li>
+      </ul>
+      <p>Há uma taxa de 15% de gestão da plataforma.</p>
+      <div class="value-example">
+        <p><strong>Exemplo:</strong> um plantão de 24h a R$ 220,00 gera <strong>R$ 187,00 líquidos</strong> para você.</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="vantagens">
+      <h2 id="vantagens">
+        <span class="section-icon" aria-hidden="true">🤝</span>
+        Vantagens de fazer parte
+      </h2>
+      <ul>
+        <li>Receba indicações diretamente de famílias</li>
+        <li>Crie seu perfil profissional com foto, experiência e disponibilidade</li>
+        <li>Ganhe visibilidade e oportunidades contínuas</li>
+        <li>Faça parte de uma rede de apoio e capacitação</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="cadastro-cta">
+      <h2 id="cadastro-cta">
+        <span class="section-icon" aria-hidden="true">📌</span>
+        Pronto para fazer parte?
+      </h2>
+      <p>Preencha seu cadastro e comece a cuidar com propósito.</p>
+      <a href="formulario_cuidador.html" class="btn" role="button">Cadastrar agora</a>
+    </section>
+  </main>
+
+  <footer>
+    <p>Plataforma CuidarBem &copy; 2025</p>
+    <p class="founders">Criado com carinho por <strong>Mayara</strong> e <strong>Romulo</strong></p>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('navbar-menu');
+      const toggle = document.querySelector('.menu-toggle');
+      
+      menu.classList.toggle('show');
+      
+      // Atualiza o aria-label do botão
+      const isOpen = menu.classList.contains('show');
+      toggle.setAttribute('aria-label', isOpen ? 'Fechar menu' : 'Abrir menu');
+      toggle.innerHTML = isOpen ? '✕' : '☰';
+    }
+
+    // Fecha o menu ao clicar fora dele
+    document.addEventListener('click', function(event) {
+      const navbar = document.querySelector('.navbar');
+      const menu = document.getElementById('navbar-menu');
+      
+      if (!navbar.contains(event.target) && menu.classList.contains('show')) {
+        menu.classList.remove('show');
+        document.querySelector('.menu-toggle').innerHTML = '☰';
+        document.querySelector('.menu-toggle').setAttribute('aria-label', 'Abrir menu');
+      }
+    });
+
+    // Fecha o menu ao pressionar Escape
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        const menu = document.getElementById('navbar-menu');
+        if (menu.classList.contains('show')) {
+          menu.classList.remove('show');
+          document.querySelector('.menu-toggle').innerHTML = '☰';
+          document.querySelector('.menu-toggle').setAttribute('aria-label', 'Abrir menu');
+        }
+      }
+    });
+  </script>
+</body>
+</html>
+

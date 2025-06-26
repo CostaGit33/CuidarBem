@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Cadastre sua família na CuidarBem para encontrar cuidadores qualificados e humanizados para idosos" />
+  <title>Cadastro de Família - CuidarBem</title>
+  <style>
+    :root {
+      --primary-color: #e67e22;
+      --secondary-color: #f39c12;
+      --background-color: #fffaf5;
+      --text-color: #333;
+      --card-background: #ffffff;
+      --border-color: #ccc;
+      --hover-color: #cf711c;
+      --error-color: #e74c3c;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--background-color);
+      margin: 0;
+      padding: 0;
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+      font-size: 36px;
+      margin: 0;
+      font-weight: 700;
+    }
+
+    header p {
+      font-size: 18px;
+      margin-top: 10px;
+      font-weight: 500;
+    }
+
+    .navbar {
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      padding: 15px 20px;
+      border-radius: 0 0 8px 8px;
+      position: relative;
+    }
+
+    .navbar-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .navbar ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 30px;
+    }
+
+    .navbar li {
+      display: inline-block;
+    }
+
+    .navbar a {
+      text-decoration: none;
+      color: white;
+      font-weight: 600;
+      font-size: 16px;
+      padding: 10px 15px;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+    }
+
+    .navbar a:hover,
+    .navbar a:focus {
+      background-color: rgba(255, 255, 255, 0.2);
+      color: #ffe6cc;
+    }
+
+    .navbar a.active {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    /* Menu hambúrguer para dispositivos móveis */
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+      padding: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      .navbar ul {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        padding: 20px;
+        gap: 10px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      }
+
+      .navbar ul.show {
+        display: flex;
+      }
+
+      .navbar li {
+        width: 100%;
+        text-align: center;
+      }
+
+      .navbar a {
+        display: block;
+        width: 100%;
+        padding: 15px;
+      }
+    }
+
+    main {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .form-container {
+      background-color: var(--card-background);
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+
+    .form-title {
+      text-align: center;
+      color: var(--primary-color);
+      margin-bottom: 30px;
+      font-size: 28px;
+      font-weight: 700;
+    }
+
+    .form-group {
+      margin-bottom: 25px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #555;
+      font-size: 16px;
+    }
+
+    .required::after {
+      content: " *";
+      color: var(--error-color);
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px 15px;
+      border-radius: 8px;
+      border: 2px solid var(--border-color);
+      font-size: 16px;
+      font-family: inherit;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      background-color: #fafafa;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.1);
+      background-color: white;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .submit-button {
+      width: 100%;
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      padding: 15px 30px;
+      font-size: 18px;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 20px;
+    }
+
+    .submit-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(230, 126, 34, 0.3);
+    }
+
+    .submit-button:active {
+      transform: translateY(0);
+    }
+
+    .submit-button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    footer {
+      background: #2c2c2c;
+      color: #eee;
+      text-align: center;
+      padding: 30px 20px;
+      margin-top: 60px;
+      border-radius: 12px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    footer p {
+      margin: 8px 0;
+      font-size: 16px;
+    }
+
+    .founders {
+      font-size: 14px;
+      color: #bbb;
+      margin-top: 10px;
+    }
+
+    /* Indicador de campos obrigatórios */
+    .required-note {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+
+    .error-message {
+      color: var(--error-color);
+      font-size: 14px;
+      margin-top: 5px;
+      display: none;
+    }
+
+    .field-error {
+      border-color: var(--error-color) !important;
+    }
+
+    /* Loading state */
+    .loading {
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .loading::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 20px;
+      height: 20px;
+      margin: -10px 0 0 -10px;
+      border: 2px solid #ffffff;
+      border-radius: 50%;
+      border-top-color: transparent;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Responsividade adicional */
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 28px;
+      }
+
+      header p {
+        font-size: 16px;
+      }
+
+      .form-container {
+        padding: 25px;
+        margin: 20px 10px;
+      }
+
+      .form-title {
+        font-size: 24px;
+      }
+
+      input, select, textarea {
+        font-size: 16px; /* Evita zoom no iOS */
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>CuidarBem</h1>
+    <p>Apoio Familiar e Cuidado Humanizado para Idosos</p>
+  </header>
+
+  <nav class="navbar" role="navigation" aria-label="Menu principal">
+    <div class="navbar-container">
+      <button class="menu-toggle" aria-label="Abrir menu" onclick="toggleMenu()">
+        ☰
+      </button>
+      <ul id="navbar-menu">
+        <li><a href="landing_page.html">Início</a></li>
+        <li><a href="sou_cuidador.html">Sou Cuidador</a></li>
+        <li><a href="formulario_familias.html" class="active" aria-current="page">Sou uma Família</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <section class="form-container">
+      <h1 class="form-title">Cadastro de Família</h1>
+      <p class="required-note">* Campos obrigatórios</p>
+      
+      <form id="familiaForm" aria-label="Formulário de cadastro de família">
+        <div class="form-group">
+          <label for="responsavel" class="required">Nome do Responsável Principal</label>
+          <input type="text" id="responsavel" name="responsavel" required 
+                 aria-describedby="responsavel-help" />
+          <div class="error-message" id="responsavel-error">Por favor, informe o nome do responsável</div>
+        </div>
+
+        <div class="form-group">
+          <label for="telefone" class="required">Telefone para Contato</label>
+          <input type="tel" id="telefone" name="telefone" required 
+                 placeholder="(00) 00000-0000"
+                 aria-describedby="telefone-help" />
+          <div class="error-message" id="telefone-error">Por favor, informe um telefone válido</div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" name="email" 
+                 placeholder="seu@email.com" />
+          <div class="error-message" id="email-error">Por favor, informe um e-mail válido</div>
+        </div>
+
+        <div class="form-group">
+          <label for="idoso">Nome da Pessoa Assistida</label>
+          <input type="text" id="idoso" name="idoso" />
+        </div>
+
+        <div class="form-group">
+          <label for="idade">Idade da Pessoa</label>
+          <input type="number" id="idade" name="idade" min="0" max="120" />
+        </div>
+
+        <div class="form-group">
+          <label for="condicoes">Condições de Saúde</label>
+          <textarea id="condicoes" name="condicoes" 
+                    placeholder="Ex: Alzheimer, AVC, mobilidade reduzida, diabetes..."
+                    aria-describedby="condicoes-help"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="familia">Outros Familiares Envolvidos no Cuidado</label>
+          <textarea id="familia" name="familia" 
+                    placeholder="Descreva outros familiares que participam do cuidado"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="turno" class="required">Turno Necessário</label>
+          <select id="turno" name="turno" required>
+            <option value="">Selecione um turno</option>
+            <option value="manha">Manhã (6h às 14h)</option>
+            <option value="tarde">Tarde (14h às 22h)</option>
+            <option value="noite">Noite (22h às 6h)</option>
+            <option value="integral">Integral (12h)</option>
+            <option value="plantao">Plantão 24h</option>
+          </select>
+          <div class="error-message" id="turno-error">Por favor, selecione um turno</div>
+        </div>
+
+        <div class="form-group">
+          <label for="urgencia" class="required">Urgência do Atendimento</label>
+          <select id="urgencia" name="urgencia" required>
+            <option value="">Selecione a urgência</option>
+            <option value="normal">Normal (em até 7 dias)</option>
+            <option value="rapido">Rápido (em 2 a 3 dias)</option>
+            <option value="urgente">Urgente (até 24h)</option>
+          </select>
+          <div class="error-message" id="urgencia-error">Por favor, selecione a urgência</div>
+        </div>
+
+        <div class="form-group">
+          <label for="observacoes">Observações e Detalhes Especiais</label>
+          <textarea id="observacoes" name="observacoes" 
+                    placeholder="Inclua informações sobre preferências religiosas, emocionais, rotinas especiais, etc."
+                    aria-describedby="observacoes-help"></textarea>
+        </div>
+
+        <button type="submit" class="submit-button" id="submitBtn">
+          Enviar Cadastro via WhatsApp
+        </button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>Plataforma CuidarBem &copy; 2025</p>
+    <p class="founders">Criado com carinho por <strong>Mayara</strong> e <strong>Romulo</strong></p>
+  </footer>
+
+  <script>
+    // Configuração do WhatsApp (pode ser alterada facilmente)
+    const WHATSAPP_CONFIG = {
+      number: '5524998747229',
+      message_prefix: '*Cadastro de Família - CuidarBem*\n\n'
+    };
+
+    function toggleMenu() {
+      const menu = document.getElementById('navbar-menu');
+      const toggle = document.querySelector('.menu-toggle');
+      
+      menu.classList.toggle('show');
+      
+      const isOpen = menu.classList.contains('show');
+      toggle.setAttribute('aria-label', isOpen ? 'Fechar menu' : 'Abrir menu');
+      toggle.innerHTML = isOpen ? '✕' : '☰';
+    }
+
+    // Fecha o menu ao clicar fora dele
+    document.addEventListener('click', function(event) {
+      const navbar = document.querySelector('.navbar');
+      const menu = document.getElementById('navbar-menu');
+      
+      if (!navbar.contains(event.target) && menu.classList.contains('show')) {
+        menu.classList.remove('show');
+        document.querySelector('.menu-toggle').innerHTML = '☰';
+        document.querySelector('.menu-toggle').setAttribute('aria-label', 'Abrir menu');
+      }
+    });
+
+    // Validação de campos
+    function validateField(field) {
+      const value = field.value.trim();
+      const fieldName = field.name;
+      const errorElement = document.getElementById(fieldName + '-error');
+      let isValid = true;
+
+      // Remove classes de erro anteriores
+      field.classList.remove('field-error');
+      if (errorElement) {
+        errorElement.style.display = 'none';
+      }
+
+      // Validação por tipo de campo
+      if (field.hasAttribute('required') && !value) {
+        isValid = false;
+      } else if (field.type === 'email' && value && !isValidEmail(value)) {
+        isValid = false;
+      } else if (field.type === 'tel' && value && !isValidPhone(value)) {
+        isValid = false;
+      }
+
+      // Mostra erro se inválido
+      if (!isValid) {
+        field.classList.add('field-error');
+        if (errorElement) {
+          errorElement.style.display = 'block';
+        }
+      }
+
+      return isValid;
+    }
+
+    function isValidEmail(email) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(email);
+    }
+
+    function isValidPhone(phone) {
+      const phoneRegex = /^[\(\)\s\-\+\d]{10,}$/;
+      return phoneRegex.test(phone);
+    }
+
+    // Validação em tempo real
+    document.querySelectorAll('input, select, textarea').forEach(field => {
+      field.addEventListener('blur', () => validateField(field));
+      field.addEventListener('input', function() {
+        if (this.classList.contains('field-error')) {
+          validateField(this);
+        }
+      });
+    });
+
+    // Função para enviar via WhatsApp
+    function enviarWhatsApp() {
+      const form = document.getElementById('familiaForm');
+      const submitBtn = document.getElementById('submitBtn');
+      
+      // Validação completa do formulário
+      const requiredFields = form.querySelectorAll('[required]');
+      let isFormValid = true;
+      
+      requiredFields.forEach(field => {
+        if (!validateField(field)) {
+          isFormValid = false;
+        }
+      });
+
+      if (!isFormValid) {
+        alert('Por favor, corrija os campos destacados em vermelho.');
+        return;
+      }
+
+      // Mostra estado de carregamento
+      submitBtn.classList.add('loading');
+      submitBtn.textContent = 'Preparando...';
+
+      // Coleta os dados do formulário
+      const formData = new FormData(form);
+      const data = {};
+      for (let [key, value] of formData.entries()) {
+        data[key] = value;
+      }
+
+      // Monta a mensagem
+      const mensagem = WHATSAPP_CONFIG.message_prefix +
+        `*Nome do Responsável:* ${data.responsavel}\n` +
+        `*Telefone:* ${data.telefone}\n` +
+        `*E-mail:* ${data.email || 'Não informado'}\n` +
+        `*Nome da Pessoa Assistida:* ${data.idoso || 'Não informado'}\n` +
+        `*Idade da Pessoa:* ${data.idade || 'Não informado'}\n` +
+        `*Condições de Saúde:* ${data.condicoes || 'Não informado'}\n` +
+        `*Outros Familiares Envolvidos:* ${data.familia || 'Não informado'}\n` +
+        `*Turno Necessário:* ${data.turno}\n` +
+        `*Urgência do Atendimento:* ${data.urgencia}\n` +
+        `*Observações:* ${data.observacoes || 'Nenhuma'}`;
+
+      try {
+        const url = `https://wa.me/${WHATSAPP_CONFIG.number}?text=${encodeURIComponent(mensagem)}`;
+        window.open(url, '_blank');
+        
+        // Feedback de sucesso
+        setTimeout(() => {
+          alert('Cadastro enviado com sucesso! Entraremos em contato em breve.');
+          form.reset();
+        }, 1000);
+        
+      } catch (error) {
+        console.error('Erro ao enviar:', error);
+        alert('Erro ao enviar cadastro. Tente novamente.');
+      } finally {
+        // Remove estado de carregamento
+        submitBtn.classList.remove('loading');
+        submitBtn.textContent = 'Enviar Cadastro via WhatsApp';
+      }
+    }
+
+    // Event listener do formulário
+    document.getElementById('familiaForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      enviarWhatsApp();
+    });
+
+    // Máscara para telefone
+    document.getElementById('telefone').addEventListener('input', function(e) {
+      let value = e.target.value.replace(/\D/g, '');
+      if (value.length >= 11) {
+        value = value.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+      } else if (value.length >= 7) {
+        value = value.replace(/(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
+      } else if (value.length >= 3) {
+        value = value.replace(/(\d{2})(\d{0,5})/, '($1) $2');
+      }
+      e.target.value = value;
+    });
+  </script>
+</body>
+</html>
+
